@@ -3,7 +3,7 @@ import re
 
 from adventofcode2023.problem import Problem
 from adventofcode2023.solution import Solution
-from adventofcode2023 import d01, d02, d03, d04, d05, d06, d07, d08
+from adventofcode2023 import d01, d02, d03, d04, d05, d06, d07, d08, d09
 
 
 @dataclass
@@ -20,7 +20,8 @@ DAYS: dict[int, Day] = {
     5: Day(d05.Problem05, d05.Solution05),
     6: Day(d06.Problem06, d06.Solution06),
     7: Day(d07.Problem07, d07.Solution07),
-    8: Day(d08.Problem08, d08.Solution08)
+    8: Day(d08.Problem08, d08.Solution08),
+    9: Day(d09.Problem09, d09.Solution09)
 }
 
 DAY_SEARCHER_RE = re.compile(
