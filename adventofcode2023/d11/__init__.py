@@ -32,14 +32,14 @@ class Solution11(Solution):
         expanded_points.sort(key=lambda p: p[0]) # sort by column (x) first
         for j in range(n):
             x, y = expanded_points[j]
-            if i < len(empty_columns) and x > empty_columns[i]:
+            while i < len(empty_columns) and x > empty_columns[i]:
                 i += 1
             expanded_points[j] = x + i * expansion_factor, y
         i = 0
         expanded_points.sort(key=lambda p: p[1]) # sort by row (y) next
         for j in range(n):
             x, y = expanded_points[j]
-            if i < len(empty_rows) and y > empty_rows[i]:
+            while i < len(empty_rows) and y > empty_rows[i]:
                 i += 1
             expanded_points[j] = x, y + i * expansion_factor
         total = 0
