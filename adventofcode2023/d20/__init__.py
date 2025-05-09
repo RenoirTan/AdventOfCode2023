@@ -188,4 +188,6 @@ class Solution20(Solution):
                 if pulse.source in fc_inputs and pulse.level:
                     fc_inputs_first_seen[pulse.source] = p
                     fc_inputs.remove(pulse.source)
+            manager.pulses = []
+            manager.frontier_index = 0
         return math.lcm(*fc_inputs_first_seen.values())
