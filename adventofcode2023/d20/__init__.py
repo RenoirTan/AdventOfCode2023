@@ -33,6 +33,9 @@ class Module(object):
     def receive_and_send_across(self, pulse: Pulse) -> list["Pulse"]:
         pulse = self.receive_and_send(pulse)
         return [] if pulse is None else pulse.across(self.destinations)
+    
+    def reset(self):
+        pass
 
 
 @dataclass
@@ -61,6 +64,9 @@ class FlipFlop(Module):
             return None
         self.state = not self.state
         return Pulse(self.name, self.state)
+    
+    def reset(self):
+        self.state = False
 
 
 @dataclass
@@ -73,6 +79,10 @@ class Conjunction(Module):
     def receive_and_send(self, pulse: Pulse) -> Pulse | None:
         self.memory[pulse.source] = pulse.level
         return Pulse(self.name, any(not level for level in self.memory.values()))
+    
+    def reset(self):
+        for k in self.memory.keys():
+            self.memory[k] = False
 
 
 @dataclass
@@ -115,6 +125,10 @@ class Configuration(object):
             for destination in connections.get(module_name, []):
                 modules[destination].add_source(module_name)
         return Configuration(modules)
+    
+    def reset(self):
+        for module in self.modules.values():
+            module.reset()
     
     def sources_of(self, dest: str) -> list[str]:
         return [src for src, mod in self.modules.items() if dest in mod.destinations]
@@ -162,6 +176,7 @@ class Problem20(Problem):
 
 class Solution20(Solution):
     def p1(self, problem: Problem20, button_presses: int = 1000) -> int:
+        problem.configuration.reset()
         manager = Manager(problem.configuration)
         for p in range(button_presses):
             manager.press_button()
@@ -172,6 +187,7 @@ class Solution20(Solution):
         return low * high
     
     def p2(self, problem: Problem20) -> int:
+        problem.configuration.reset()
         final_conjunction = problem.configuration.sources_of("rx")[0]
         fc_inputs = set(problem.configuration.sources_of(final_conjunction))
         fc_inputs_first_seen: dict[str, int] = {a: 0 for a in fc_inputs}
