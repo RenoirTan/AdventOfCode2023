@@ -5,7 +5,7 @@ from adventofcode2023.problem import Problem
 from adventofcode2023.solution import Solution
 from adventofcode2023 import (
     d01, d02, d03, d04, d05, d06, d07, d08, d09, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19,
-    d20
+    d20, d21
 )
 
 
@@ -35,7 +35,8 @@ DAYS: dict[int, Day] = {
     17: Day(d17.Problem17, d17.Solution17),
     18: Day(d18.Problem18, d18.Solution18),
     19: Day(d19.Problem19, d19.Solution19),
-    20: Day(d20.Problem20, d20.Solution20)
+    20: Day(d20.Problem20, d20.Solution20),
+    21: Day(d21.Problem21, d21.Solution21)
 }
 
 DAY_SEARCHER_RE = re.compile(
