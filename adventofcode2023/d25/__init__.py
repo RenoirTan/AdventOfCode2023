@@ -72,3 +72,6 @@ class Solution25(Solution):
             a, b = tuple(graph.keys())
             if len(graph[a]) == 3:
                 return counts[a] * counts[b]
+    
+    def p2(self, problem: Problem25) -> int:
+        return 100
